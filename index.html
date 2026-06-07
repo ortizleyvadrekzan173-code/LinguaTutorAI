@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="LinguaTutor AI">
+  <meta name="description" content="Aprende inglés, alemán y francés con tu profesor AI. Niveles A1 a C1.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <title>LinguaTutor AI — Tu profesor de idiomas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Splash / Onboarding -->
+    <section id="splash" class="screen active">
+      <div class="splash-content">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg viewBox="0 0 64 64" fill="none">
+              <circle cx="32" cy="32" r="30" fill="url(#lg)" />
+              <text x="32" y="40" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">LT</text>
+              <defs>
+                <linearGradient id="lg" x1="0" y1="0" x2="64" y2="64">
+                  <stop offset="0%" stop-color="#667eea" />
+                  <stop offset="100%" stop-color="#764ba2" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1 class="logo-text">LinguaTutor <span class="logo-ai">AI</span></h1>
+        </div>
+        <p class="splash-subtitle">Tu profesor de idiomas con inteligencia artificial</p>
+        <form id="teacher-form" class="teacher-form">
+          <div class="photo-upload" id="photo-upload">
+            <div class="photo-preview" id="photo-preview">
+              <svg viewBox="0 0 40 40" fill="none" class="photo-placeholder">
+                <circle cx="20" cy="14" r="6" fill="#667eea" opacity="0.6"/>
+                <path d="M6 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#667eea" stroke-width="2" fill="none" opacity="0.6"/>
+              </svg>
+            </div>
+            <span class="upload-label">Sube tu foto de perfil</span>
+            <input type="file" id="photo-input" accept="image/*" hidden>
+          </div>
+          <div class="input-group">
+            <input type="text" id="teacher-name" placeholder="Nombre del profesor" value="Profesor Alex" required>
+          </div>
+          <button type="submit" class="btn-primary">Comenzar</button>
+        </form>
+        <p class="share-hint" id="share-hint">Comparte LinguaTutor con tus amigos</p>
+        <div class="share-buttons">
+          <button id="share-btn" class="btn-share" title="Compartir app">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Compartir
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Dashboard -->
+    <section id="dashboard" class="screen">
+      <header class="app-header">
+        <div class="header-left">
+          <div class="teacher-avatar-sm" id="teacher-avatar-sm"></div>
+          <div>
+            <span class="teacher-label">Tu profesor</span>
+            <span class="teacher-name" id="header-teacher-name">Profesor</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button id="profile-btn" class="btn-icon" title="Perfil">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+          <button id="share-header-btn" class="btn-icon" title="Compartir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="welcome-section">
+          <h2 id="welcome-msg">¿Qué idioma quieres practicar hoy?</h2>
+        </div>
+
+        <!-- Language Cards -->
+        <div class="language-grid">
+          <div class="lang-card" data-lang="en">
+            <div class="lang-flag">🇬🇧</div>
+            <div class="lang-info">
+              <span class="lang-name">Inglés</span>
+              <span class="lang-levels">A1 - C1</span>
+            </div>
+            <div class="lang-progress" id="progress-en">
+              <div class="progress-bar" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="lang-card" data-lang="de">
+            <div class="lang-flag">🇩🇪</div>
+            <div class="lang-info">
+              <span class="lang-name">Alemán</span>
+              <span class="lang-levels">A1 - C1</span>
+            </div>
+            <div class="lang-progress" id="progress-de">
+              <div class="progress-bar" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="lang-card" data-lang="fr">
+            <div class="lang-flag">🇫🇷</div>
+            <div class="lang-info">
+              <span class="lang-name">Francés</span>
+              <span class="lang-levels">A1 - C1</span>
+            </div>
+            <div class="lang-progress" id="progress-fr">
+              <div class="progress-bar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Level Selector -->
+        <div class="level-selector" id="level-selector">
+          <h3>Selecciona tu nivel</h3>
+          <div class="level-tabs">
+            <button class="level-tab" data-level="a1">A1</button>
+            <button class="level-tab" data-level="a2">A2</button>
+            <button class="level-tab" data-level="b1">B1</button>
+            <button class="level-tab" data-level="b2">B2</button>
+            <button class="level-tab" data-level="c1">C1</button>
+          </div>
+        </div>
+
+        <!-- Lesson Area -->
+        <div class="lesson-area" id="lesson-area">
+          <div class="lesson-header">
+            <h3 id="lesson-title">Selecciona un idioma y nivel</h3>
+          </div>
+          <div class="lesson-content" id="lesson-content">
+            <div class="empty-state">
+              <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="35" stroke="#667eea" stroke-width="2" stroke-dasharray="4 4" fill="none"/><text x="40" y="45" text-anchor="middle" fill="#667eea" font-size="14" opacity="0.7">?</text></svg>
+              <p>Elige un idioma y nivel para empezar</p>
+            </div>
+          </div>
+          <div class="lesson-actions" id="lesson-actions">
+            <button id="new-lesson-btn" class="btn-secondary">Nueva lección</button>
+            <button id="exam-btn" class="btn-secondary btn-accent" title="Examen escrito">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Examen
+            </button>
+            <button id="oral-btn" class="btn-secondary btn-accent" title="Práctica oral">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              Oral
+            </button>
+            <button id="speak-btn" class="btn-secondary" title="Escuchar pronunciación">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              Escuchar
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <nav class="bottom-nav">
+        <button class="nav-item active" data-screen="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Inicio</span>
+        </button>
+        <button class="nav-item" data-screen="lessons">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Lecciones</span>
+        </button>
+        <button class="nav-item" data-screen="translate">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>Traducir</span>
+        </button>
+        <button class="nav-item" data-screen="profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Perfil</span>
+        </button>
+      </nav>
+    </section>
+
+    <!-- Profile Screen -->
+    <section id="profile" class="screen">
+      <header class="app-header">
+        <button class="btn-icon back-btn" data-back="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <h2>Tu Perfil</h2>
+      </header>
+      <main class="main-content">
+        <div class="profile-section">
+          <div class="profile-avatar-large" id="profile-avatar"></div>
+          <h3 id="profile-name">Profesor</h3>
+          <button id="change-photo-btn" class="btn-secondary">Cambiar foto</button>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value" id="stat-lessons">0</span>
+            <span class="stat-label">Lecciones</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="stat-words">0</span>
+            <span class="stat-label">Palabras</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="stat-streak">0</span>
+            <span class="stat-label">Racha 🔥</span>
+          </div>
+        </div>
+        <div class="about-section">
+          <h4>Sobre LinguaTutor AI</h4>
+          <p>Versión 1.0.0 — Aprendizaje inteligente de idiomas con IA.</p>
+          <p>Inglés • Alemán • Francés • Niveles A1 a C1</p>
+        </div>
+      </main>
+    </section>
+
+    <!-- Lessons History Screen -->
+    <section id="lessons" class="screen">
+      <header class="app-header">
+        <button class="btn-icon back-btn" data-back="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <h2>Historial de Lecciones</h2>
+      </header>
+      <main class="main-content">
+        <div id="lessons-history">
+          <div class="empty-state">
+            <p>Aún no hay lecciones completadas</p>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <!-- Translate Screen -->
+    <section id="translate" class="screen">
+      <header class="app-header">
+        <button class="btn-icon back-btn" data-back="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <h2>Traductor</h2>
+      </header>
+      <main class="main-content">
+        <div class="translate-box">
+          <div class="translate-languages">
+            <select id="translate-from" class="lang-select">
+              <option value="es">Español</option>
+              <option value="en">Inglés</option>
+              <option value="de">Alemán</option>
+              <option value="fr">Francés</option>
+            </select>
+            <button id="swap-lang" class="btn-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            </button>
+            <select id="translate-to" class="lang-select">
+              <option value="en">Inglés</option>
+              <option value="de">Alemán</option>
+              <option value="fr">Francés</option>
+              <option value="es" selected>Español</option>
+            </select>
+          </div>
+          <textarea id="translate-input" placeholder="Escribe algo para traducir..." rows="3"></textarea>
+          <div class="translate-result" id="translate-result"></div>
+          <button id="translate-btn" class="btn-primary">Traducir</button>
+        </div>
+      </main>
+    </section>
+  </div>
+
+  <!-- Exam Overlay -->
+  <div id="exam-overlay" class="modal-overlay">
+    <div class="modal-content exam-modal">
+      <div class="modal-header">
+        <h3>📝 Examen Escrito</h3>
+        <span class="exam-count" id="exam-count">1/10</span>
+      </div>
+      <div class="exam-body">
+        <div class="exam-question">
+          <div class="exam-badge">Traduce al idioma de estudio:</div>
+          <div class="exam-word" id="exam-word">...</div>
+        </div>
+        <input type="text" id="exam-input" placeholder="Escribe la respuesta..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <div class="exam-feedback" id="exam-feedback"></div>
+        <div class="exam-score-bar">
+          <div class="score-fill" id="score-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="exam-actions">
+        <button id="exam-submit-btn" class="btn-primary">Verificar</button>
+        <button id="exam-next-btn" class="btn-secondary" style="display:none">Siguiente →</button>
+        <button id="exam-close-btn" class="btn-secondary">✕ Cerrar</button>
+      </div>
+      <div class="exam-result" id="exam-result" style="display:none">
+        <div class="result-icon" id="result-icon">🎉</div>
+        <div class="result-text" id="result-text">¡Excelente!</div>
+        <div class="result-score" id="result-score">10/10</div>
+        <button id="exam-retry-btn" class="btn-secondary">Reintentar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Oral Practice Overlay -->
+  <div id="oral-overlay" class="modal-overlay">
+    <div class="modal-content oral-modal">
+      <div class="modal-header">
+        <h3>🎤 Práctica Oral</h3>
+        <div class="teacher-indicator">
+          <span class="teacher-dot"></span>
+          <span>El profesor te escucha</span>
+        </div>
+      </div>
+      <div class="oral-body">
+        <div class="oral-phrase-section">
+          <div class="oral-label">Frase a practicar:</div>
+          <div class="oral-phrase" id="oral-phrase">...</div>
+          <div class="oral-translation" id="oral-translation">...</div>
+        </div>
+        <div class="oral-controls">
+          <div class="oral-wave" id="oral-wave">
+            <canvas id="wave-canvas" width="320" height="80"></canvas>
+          </div>
+          <div class="oral-buttons">
+            <button id="oral-record-btn" class="oral-btn record-btn" title="Grabar">
+              <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+              <span>Grabar</span>
+            </button>
+          </div>
+          <div class="speed-controls" id="speed-controls" style="display:none">
+            <div class="speed-label">Velocidad de reproducción:</div>
+            <div class="speed-buttons">
+              <button class="speed-btn active" data-speed="1.0">Normal</button>
+              <button class="speed-btn" data-speed="0.6">Lento</button>
+              <button class="speed-btn" data-speed="0.3">Muy lento</button>
+            </div>
+            <div class="oral-playback">
+              <button id="oral-play-btn" class="btn-secondary">▶ Reproducir mi voz</button>
+              <button id="oral-teacher-btn" class="btn-secondary">🎓 Escuchar al profesor</button>
+            </div>
+          </div>
+        </div>
+        <div class="oral-tips" id="oral-tips">
+          <div class="tip-card">
+            <span class="tip-icon">💡</span>
+            <span class="tip-text">Presiona "Grabar" y di la frase. Luego escúchate en 3 velocidades.</span>
+          </div>
+        </div>
+      </div>
+      <div class="oral-footer">
+        <button id="oral-prev-btn" class="btn-secondary">← Anterior</button>
+        <button id="oral-close-btn" class="btn-secondary">✕ Cerrar</button>
+        <button id="oral-next-btn" class="btn-secondary">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast"></div>
+
+  <script src="js/app.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>

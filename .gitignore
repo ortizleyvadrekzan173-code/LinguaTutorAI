@@ -1,0 +1,8 @@
+node_modules
+*.log
+public_url.txt
+server.log
+node_out.log
+node_err.log
+ssh.log*
+.DS_Store

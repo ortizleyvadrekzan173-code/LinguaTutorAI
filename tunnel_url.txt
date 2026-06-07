@@ -1,0 +1,8 @@
+✅ Servidor local: http://localhost:3000
+
+═══════════════════════════════════════════
+   🌐  LINK PÚBLICO: https://lt-linguaturb-mq4bx21d.loca.lt
+   📤  Comparte este enlace!
+   ⏳  El túnel expira cuando cierres este proceso
+═══════════════════════════════════════════
+

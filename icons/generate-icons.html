@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html><head><title>Generar Iconos</title></head>
+<body style="background:#0f0f1a;color:white;font-family:sans-serif;text-align:center;padding:40px">
+<h1>Generando iconos de LinguaTutor AI...</h1>
+<p>Esta página genera los iconos PNG para la PWA.</p>
+<canvas id="c" style="display:none"></canvas>
+<script>
+async function generateIcons() {
+  const sizes = [48, 72, 96, 128, 144, 152, 192, 384, 512];
+  const c = document.getElementById('c');
+  const ctx = c.getContext('2d');
+
+  for (const size of sizes) {
+    c.width = size; c.height = size;
+    const r = size * 0.85;
+    const g = ctx.createLinearGradient(0, 0, size, size);
+    g.addColorStop(0, '#667eea');
+    g.addColorStop(1, '#764ba2');
+    ctx.beginPath();
+    ctx.roundRect((size-r)/2, (size-r)/2, r, r, size*0.16);
+    ctx.fillStyle = g;
+    ctx.fill();
+    ctx.fillStyle = 'white';
+    ctx.font = `bold ${size * 0.42}px system-ui, -apple-system, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('LT', size/2, size/2 + size*0.04);
+    const blob = await new Promise(resolve => c.toBlob(resolve, 'image/png'));
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `icon-${size}.png`;
+    a.click();
+    URL.revokeObjectURL(url);
+    document.body.innerHTML += `<span>✅ icon-${size}.png generado</span><br>`;
+    await new Promise(r => setTimeout(r, 100));
+  }
+  document.body.innerHTML += '<h2>✅ Todos los iconos generados</h2>';
+  document.body.innerHTML += '<p>Guarda los archivos en la carpeta icons/</p>';
+}
+generateIcons();
+</script>
+</body></html>
