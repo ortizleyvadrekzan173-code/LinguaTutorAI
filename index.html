@@ -153,6 +153,10 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
               Oral
             </button>
+            <button id="chat-btn" class="btn-secondary btn-accent" title="Conversar con el profesor">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              Conversar
+            </button>
             <button id="speak-btn" class="btn-secondary" title="Escuchar pronunciación">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
               Escuchar
@@ -351,6 +355,42 @@
         <button id="oral-prev-btn" class="btn-secondary">← Anterior</button>
         <button id="oral-close-btn" class="btn-secondary">✕ Cerrar</button>
         <button id="oral-next-btn" class="btn-secondary">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Overlay -->
+  <div id="chat-overlay" class="modal-overlay">
+    <div class="modal-content chat-modal">
+      <div class="modal-header">
+        <div class="header-left">
+          <div class="chat-teacher-avatar" id="chat-teacher-avatar">
+            <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="6" fill="currentColor" opacity="0.6"/><path d="M6 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/></svg>
+          </div>
+          <div>
+            <span class="teacher-label">Conversando con</span>
+            <span class="teacher-name" id="chat-teacher-name">Profesor</span>
+          </div>
+        </div>
+        <button id="chat-close-btn" class="btn-icon" title="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-welcome">
+          <p>Presiona "Iniciar conversación" para empezar</p>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Escribe tu respuesta..." autocomplete="off" disabled>
+        <button id="chat-send-btn" class="btn-chat-send" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="chat-footer">
+        <button id="chat-start-btn" class="btn-primary">🎤 Iniciar conversación</button>
+        <button id="chat-repeat-btn" class="btn-secondary" style="display:none">🔊 Repetir</button>
+        <button id="chat-translate-btn" class="btn-secondary" style="display:none">🌐 Traducir</button>
       </div>
     </div>
   </div>

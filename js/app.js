@@ -147,6 +147,343 @@ const EXAMPLES = {
   }
 };
 
+/* ---- Conversation Scripts ---- */
+const CONVERSATIONS = {
+  en: {
+    a1: [
+      { teacher: "Hello! How are you today?", es: "¡Hola! ¿Cómo estás hoy?" },
+      { teacher: "My name is [teacher]. What's your name?", es: "Mi nombre es [teacher]. ¿Cómo te llamas?" },
+      { teacher: "Nice to meet you, [student]! Where are you from?", es: "¡Mucho gusto, [student]! ¿De dónde eres?" },
+      { teacher: "Wonderful! Do you like learning English?", es: "¡Maravilloso! ¿Te gusta aprender inglés?" },
+      { teacher: "That's great! What color do you like?", es: "¡Qué bien! ¿Qué color te gusta?" },
+      { teacher: "Excellent! Let's practice more. Can you say 'thank you'?", es: "¡Excelente! Practiquemos más. ¿Puedes decir 'gracias'?" },
+      { teacher: "Perfect! You're doing very well. Goodbye for now!", es: "¡Perfecto! Lo estás haciendo muy bien. ¡Hasta luego!" }
+    ],
+    a2: [
+      { teacher: "Good morning! How can I help you today?", es: "¡Buenos días! ¿Cómo puedo ayudarte hoy?" },
+      { teacher: "I'd like to go to the supermarket. Where is it?", es: "Me gustaría ir al supermercado. ¿Dónde está?" },
+      { teacher: "Thank you! What do you need to buy?", es: "¡Gracias! ¿Qué necesitas comprar?" },
+      { teacher: "Good choices! How much does bread cost?", es: "¡Buenas elecciones! ¿Cuánto cuesta el pan?" },
+      { teacher: "That's cheap! Do you have any money?", es: "¡Es barato! ¿Tienes dinero?" },
+      { teacher: "Perfect! Let's pay and go home. Well done!", es: "¡Perfecto! Paguemos y vayamos a casa. ¡Bien hecho!" }
+    ],
+    b1: [
+      { teacher: "Hi there! What did you do last weekend?", es: "¡Hola! ¿Qué hiciste el fin de semana pasado?" },
+      { teacher: "That sounds interesting! Do you enjoy outdoor activities?", es: "¡Suena interesante! ¿Disfrutas las actividades al aire libre?" },
+      { teacher: "I see! What's your favorite hobby?", es: "¡Entiendo! ¿Cuál es tu pasatiempo favorito?" },
+      { teacher: "That's a great hobby! How long have you been doing it?", es: "¡Es un gran pasatiempo! ¿Cuánto tiempo llevas haciéndolo?" },
+      { teacher: "Amazing! I think hobbies are important for our well-being.", es: "¡Increíble! Creo que los pasatiempos son importantes para nuestro bienestar." },
+      { teacher: "I agree! Let's meet again and talk more. Take care!", es: "¡Estoy de acuerdo! Encontrémonos de nuevo y hablemos más. ¡Cuídate!" }
+    ],
+    b2: [
+      { teacher: "Good day! I'd like to discuss technology. What do you think about AI?", es: "¡Buen día! Me gustaría discutir sobre tecnología. ¿Qué piensas sobre la IA?" },
+      { teacher: "That's an interesting perspective! Do you think AI will replace jobs?", es: "¡Es una perspectiva interesante! ¿Crees que la IA reemplazará empleos?" },
+      { teacher: "I understand your point. However, AI also creates new opportunities.", es: "Entiendo tu punto. Sin embargo, la IA también crea nuevas oportunidades." },
+      { teacher: "Exactly! What field do you think will benefit most from AI?", es: "¡Exactamente! ¿Qué campo crees que se beneficiará más de la IA?" },
+      { teacher: "Fascinating! I think education will transform significantly.", es: "¡Fascinante! Creo que la educación se transformará significativamente." },
+      { teacher: "Great discussion! Let's continue another day. Goodbye!", es: "¡Gran discusión! Continuemos otro día. ¡Adiós!" }
+    ],
+    c1: [
+      { teacher: "Greetings! I'd like to explore the concept of globalization. What's your view?", es: "¡Saludos! Me gustaría explorar el concepto de globalización. ¿Cuál es tu opinión?" },
+      { teacher: "A compelling argument! How do you think globalization affects local cultures?", es: "¡Un argumento convincente! ¿Cómo crees que la globalización afecta las culturas locales?" },
+      { teacher: "That's a nuanced perspective. There are indeed both positive and negative aspects.", es: "Esa es una perspectiva matizada. De hecho, hay aspectos tanto positivos como negativos." },
+      { teacher: "Precisely! What measures could mitigate the negative effects?", es: "¡Precisamente! ¿Qué medidas podrían mitigar los efectos negativos?" },
+      { teacher: "An excellent suggestion! This requires international cooperation.", es: "¡Una excelente sugerencia! Esto requiere cooperación internacional." },
+      { teacher: "It's been a stimulating conversation. I look forward to our next discussion.", es: "Ha sido una conversación estimulante. Espero con interés nuestra próxima discusión." }
+    ]
+  },
+  de: {
+    a1: [
+      { teacher: "Hallo! Wie geht es Ihnen heute?", es: "¡Hola! ¿Cómo está usted hoy?" },
+      { teacher: "Mein Name ist [teacher]. Wie heißen Sie?", es: "Mi nombre es [teacher]. ¿Cómo se llama usted?" },
+      { teacher: "Freut mich, [student]! Woher kommen Sie?", es: "¡Mucho gusto, [student]! ¿De dónde viene?" },
+      { teacher: "Wunderbar! Lernen Sie gerne Deutsch?", es: "¡Maravilloso! ¿Le gusta aprender alemán?" },
+      { teacher: "Sehr gut! Welche Farbe mögen Sie?", es: "¡Muy bien! ¿Qué color le gusta?" },
+      { teacher: "Ausgezeichnet! Können Sie 'danke' sagen?", es: "¡Excelente! ¿Puede decir 'gracias'?" },
+      { teacher: "Perfekt! Sie machen das sehr gut. Auf Wiedersehen!", es: "¡Perfecto! Lo está haciendo muy bien. ¡Hasta luego!" }
+    ],
+    a2: [
+      { teacher: "Guten Morgen! Wie kann ich Ihnen helfen?", es: "¡Buenos días! ¿Cómo puedo ayudarle?" },
+      { teacher: "Ich möchte zum Supermarkt gehen. Wo ist er?", es: "Quisiera ir al supermercado. ¿Dónde está?" },
+      { teacher: "Danke! Was möchten Sie kaufen?", es: "¡Gracias! ¿Qué le gustaría comprar?" },
+      { teacher: "Gute Wahl! Wie viel kostet das Brot?", es: "¡Buena elección! ¿Cuánto cuesta el pan?" },
+      { teacher: "Das ist günstig! Haben Sie Geld?", es: "¡Es barato! ¿Tiene dinero?" },
+      { teacher: "Perfekt! Zahlen wir und gehen nach Hause. Gut gemacht!", es: "¡Perfecto! Paguemos y vayamos a casa. ¡Bien hecho!" }
+    ],
+    b1: [
+      { teacher: "Hallo! Was haben Sie am Wochenende gemacht?", es: "¡Hola! ¿Qué hizo el fin de semana?" },
+      { teacher: "Das klingt interessant! Machen Sie gerne Aktivitäten im Freien?", es: "¡Suena interesante! ¿Disfruta actividades al aire libre?" },
+      { teacher: "Ich verstehe! Was ist Ihr Lieblingshobby?", es: "¡Entiendo! ¿Cuál es su pasatiempo favorito?" },
+      { teacher: "Ein tolles Hobby! Wie lange machen Sie das schon?", es: "¡Un gran pasatiempo! ¿Cuánto tiempo lleva haciéndolo?" },
+      { teacher: "Toll! Ich denke, Hobbys sind wichtig für unser Wohlbefinden.", es: "¡Increíble! Creo que los pasatiempos son importantes para nuestro bienestar." },
+      { teacher: "Ich stimme zu! Treffen wir uns wieder. Passen Sie auf sich auf!", es: "¡Estoy de acuerdo! Encontrémonos de nuevo. ¡Cuídese!" }
+    ],
+    b2: [
+      { teacher: "Guten Tag! Ich möchte über Technologie sprechen. Was denken Sie über KI?", es: "¡Buen día! Hablemos sobre tecnología. ¿Qué piensa sobre la IA?" },
+      { teacher: "Ein interessanter Standpunkt! Glauben Sie, dass KI Arbeitsplätze ersetzt?", es: "¡Un punto de vista interesante! ¿Cree que la IA reemplazará empleos?" },
+      { teacher: "Ich verstehe Ihren Punkt. KI schafft aber auch neue Chancen.", es: "Entiendo su punto. Pero la IA también crea nuevas oportunidades." },
+      { teacher: "Genau! Welcher Bereich wird Ihrer Meinung nach am meisten profitieren?", es: "¡Exactamente! ¿Qué área cree que se beneficiará más?" },
+      { teacher: "Faszinierend! Ich glaube, Bildung wird sich stark verändern.", es: "¡Fascinante! Creo que la educación cambiará significativamente." },
+      { teacher: "Tolle Diskussion! Machen wir ein andermal weiter. Auf Wiedersehen!", es: "¡Gran discusión! Continuemos otro día. ¡Adiós!" }
+    ],
+    c1: [
+      { teacher: "Grüße! Lassen Sie uns Globalisierung erkunden. Was ist Ihre Ansicht?", es: "¡Saludos! Exploremos la globalización. ¿Cuál es su opinión?" },
+      { teacher: "Ein überzeugendes Argument! Wie beeinflusst Globalisierung lokale Kulturen?", es: "¡Un argumento convincente! ¿Cómo afecta la globalización a las culturas locales?" },
+      { teacher: "Eine differenzierte Perspektive. Es gibt positive und negative Aspekte.", es: "Una perspectiva matizada. Hay aspectos positivos y negativos." },
+      { teacher: "Genau! Welche Maßnahmen könnten negative Effekte mindern?", es: "¡Precisamente! ¿Qué medidas podrían mitigar los efectos negativos?" },
+      { teacher: "Ein ausgezeichneter Vorschlag! Das erfordert internationale Zusammenarbeit.", es: "¡Una excelente sugerencia! Esto requiere cooperación internacional." },
+      { teacher: "Es war ein anregendes Gespräch. Ich freue mich auf unser nächstes.", es: "Ha sido una conversación estimulante. Espero la próxima." }
+    ]
+  },
+  fr: {
+    a1: [
+      { teacher: "Bonjour! Comment allez-vous aujourd'hui?", es: "¡Hola! ¿Cómo está usted hoy?" },
+      { teacher: "Je m'appelle [teacher]. Comment vous appelez-vous?", es: "Me llamo [teacher]. ¿Cómo se llama usted?" },
+      { teacher: "Enchanté, [student]! D'où venez-vous?", es: "¡Mucho gusto, [student]! ¿De dónde viene?" },
+      { teacher: "Merveilleux! Aimez-vous apprendre le français?", es: "¡Maravilloso! ¿Le gusta aprender francés?" },
+      { teacher: "Très bien! Quelle couleur aimez-vous?", es: "¡Muy bien! ¿Qué color le gusta?" },
+      { teacher: "Excellent! Pouvez-vous dire 'merci'?", es: "¡Excelente! ¿Puede decir 'gracias'?" },
+      { teacher: "Parfait! Vous faites de très bons progrès. Au revoir!", es: "¡Perfecto! Está haciendo muy buenos progresos. ¡Hasta luego!" }
+    ],
+    a2: [
+      { teacher: "Bonjour! Comment puis-je vous aider?", es: "¡Buenos días! ¿Cómo puedo ayudarle?" },
+      { teacher: "Je voudrais aller au supermarché. Où est-il?", es: "Quisiera ir al supermercado. ¿Dónde está?" },
+      { teacher: "Merci! Qu'avez-vous besoin d'acheter?", es: "¡Gracias! ¿Qué necesita comprar?" },
+      { teacher: "Bon choix! Combien coûte le pain?", es: "¡Buena elección! ¿Cuánto cuesta el pan?" },
+      { teacher: "C'est bon marché! Avez-vous de l'argent?", es: "¡Es barato! ¿Tiene dinero?" },
+      { teacher: "Parfait! Payons et rentrons à la maison. Bien joué!", es: "¡Perfecto! Paguemos y volvamos a casa. ¡Bien hecho!" }
+    ],
+    b1: [
+      { teacher: "Salut! Qu'avez-vous fait le week-end dernier?", es: "¡Hola! ¿Qué hizo el fin de semana pasado?" },
+      { teacher: "Ça a l'air intéressant! Aimez-vous les activités de plein air?", es: "¡Suena interesante! ¿Disfruta actividades al aire libre?" },
+      { teacher: "Je vois! Quel est votre passe-temps favori?", es: "¡Entiendo! ¿Cuál es su pasatiempo favorito?" },
+      { teacher: "Un super passe-temps! Depuis combien de temps le faites-vous?", es: "¡Un gran pasatiempo! ¿Cuánto tiempo lleva haciéndolo?" },
+      { teacher: "Incroyable! Les passe-temps sont importants pour notre bien-être.", es: "¡Increíble! Los pasatiempos son importantes para nuestro bienestar." },
+      { teacher: "Je suis d'accord! Rencontrons-nous encore. Prenez soin de vous!", es: "¡Estoy de acuerdo! Encontrémonos de nuevo. ¡Cuídese!" }
+    ],
+    b2: [
+      { teacher: "Bonjour! Parlons technologie. Que pensez-vous de l'IA?", es: "¡Buen día! Hablemos de tecnología. ¿Qué piensa sobre la IA?" },
+      { teacher: "Un point de vue intéressant! L'IA remplacera-t-elle des emplois?", es: "¡Un punto de vista interesante! ¿La IA reemplazará empleos?" },
+      { teacher: "Je comprends votre point. Mais l'IA crée aussi des opportunités.", es: "Entiendo su punto. Pero la IA también crea oportunidades." },
+      { teacher: "Exactement! Quel domaine bénéficiera le plus de l'IA?", es: "¡Exactamente! ¿Qué área se beneficiará más de la IA?" },
+      { teacher: "Passionnant! Je pense que l'éducation se transformera.", es: "¡Fascinante! Creo que la educación se transformará." },
+      { teacher: "Belle discussion! Continuons un autre jour. Au revoir!", es: "¡Gran discusión! Continuemos otro día. ¡Adiós!" }
+    ],
+    c1: [
+      { teacher: "Salutations! Explorons la mondialisation. Quelle est votre opinion?", es: "¡Saludos! Exploremos la globalización. ¿Cuál es su opinión?" },
+      { teacher: "Un argument convaincant! Comment la mondialisation affecte-t-elle les cultures?", es: "¡Un argumento convincente! ¿Cómo afecta la globalización a las culturas?" },
+      { teacher: "Une perspective nuancée. Il y a des aspects positifs et négatifs.", es: "Una perspectiva matizada. Hay aspectos positivos y negativos." },
+      { teacher: "Précisément! Quelles mesures pourraient atténuer les effets négatifs?", es: "¡Precisamente! ¿Qué medidas podrían mitigar los efectos negativos?" },
+      { teacher: "Une excellente suggestion! Cela nécessite une coopération internationale.", es: "¡Una excelente sugerencia! Esto requiere cooperación internacional." },
+      { teacher: "Ce fut une conversation stimulante. J'attends notre prochaine discussion.", es: "Ha sido una conversación estimulante. Espero la próxima discusión." }
+    ]
+  }
+};
+
+const CHAT_FEEDBACK = {
+  positive: [
+    "¡Excelente respuesta!",
+    "¡Muy bien!",
+    "¡Perfecto!",
+    "¡Buen trabajo!",
+    "¡Sigue así!",
+    "¡Impresionante!",
+    "¡Bien hecho!"
+  ],
+  neutral: [
+    "Interesante respuesta.",
+    "Gracias por compartir.",
+    "Entiendo.",
+    "¡Qué bien!",
+    "Muy interesante."
+  ],
+  encouraging: [
+    "¡Sigue practicando!",
+    "Cada día mejoras más.",
+    "Estás progresando muy bien.",
+    "¡No te rindas!",
+    "La práctica hace al maestro."
+  ]
+};
+
+/* ---- Chat Functions ---- */
+let chatConversation = [];
+let chatStep = 0;
+let chatActive = false;
+
+function openChat() {
+  const lang = APP.state.selectedLang;
+  const level = APP.state.selectedLevel;
+  if (!lang || !level) return showToast('Selecciona un idioma y nivel primero');
+  if (!CONVERSATIONS[lang] || !CONVERSATIONS[lang][level]) return showToast('No hay conversaciones para este nivel');
+  chatConversation = CONVERSATIONS[lang][level];
+  chatStep = 0;
+  chatActive = false;
+  $('chat-overlay').classList.add('active');
+  $('chat-messages').innerHTML = '<div class="chat-welcome"><p>Presiona "Iniciar conversación" para empezar</p></div>';
+  $('chat-start-btn').style.display = 'block';
+  $('chat-repeat-btn').style.display = 'none';
+  $('chat-translate-btn').style.display = 'none';
+  $('chat-input').disabled = true;
+  $('chat-send-btn').disabled = true;
+  $('chat-teacher-name').textContent = APP.state.teacherName;
+  updateChatAvatar();
+}
+
+function updateChatAvatar() {
+  const container = $('chat-teacher-avatar');
+  if (APP.state.teacherPhoto) {
+    container.innerHTML = `<img src="${APP.state.teacherPhoto}" alt="Profesor">`;
+  } else {
+    container.innerHTML = '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="6" fill="currentColor" opacity="0.6"/><path d="M6 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/></svg>';
+  }
+}
+
+function startConversation() {
+  chatActive = true;
+  chatStep = 0;
+  $('chat-messages').innerHTML = '';
+  $('chat-start-btn').style.display = 'none';
+  $('chat-repeat-btn').style.display = 'inline-block';
+  $('chat-translate-btn').style.display = 'inline-block';
+  $('chat-input').disabled = false;
+  $('chat-send-btn').disabled = false;
+  showTypingIndicator();
+  setTimeout(() => {
+    hideTypingIndicator();
+    teacherSpeak(0);
+  }, 1500);
+}
+
+function teacherSpeak(step) {
+  if (!chatActive) return;
+  if (step >= chatConversation.length) {
+    endConversation();
+    return;
+  }
+  chatStep = step;
+  const msg = chatConversation[step];
+  let text = msg.teacher.replace('[teacher]', APP.state.teacherName);
+  const studentName = APP.state.teacherName === 'Profesor Alex' ? 'Student' : APP.state.teacherName;
+  text = text.replace('[student]', studentName);
+
+  addMessage(text, msg.es, 'teacher');
+  speak(text, { en: 'en', de: 'de', fr: 'fr' }[APP.state.selectedLang]);
+}
+
+function endConversation() {
+  chatActive = false;
+  $('chat-input').disabled = true;
+  $('chat-send-btn').disabled = true;
+  $('chat-start-btn').textContent = '🔄 Nueva conversación';
+  $('chat-start-btn').style.display = 'block';
+  showToast('Conversación completada');
+}
+
+function addMessage(text, translation, sender, correction) {
+  const container = $('chat-messages');
+  const teacherDefault = '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="6" fill="currentColor" opacity="0.6"/><path d="M6 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/></svg>';
+
+  const avatarHtml = sender === 'teacher'
+    ? (APP.state.teacherPhoto ? `<img src="${APP.state.teacherPhoto}" alt="P">` : teacherDefault)
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>';
+
+  const time = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  const correctionHtml = correction ? `<div class="msg-correction">✅ ${correction}</div>` : '';
+
+  const div = document.createElement('div');
+  div.className = `msg ${sender}`;
+  div.innerHTML = `
+    <div class="msg-avatar">${avatarHtml}</div>
+    <div class="msg-bubble">
+      <div class="msg-text">${text}</div>
+      ${translation ? `<div class="msg-translation">${translation}</div>` : ''}
+      ${correctionHtml}
+      <div class="msg-time">${time}</div>
+    </div>
+  `;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTypingIndicator() {
+  const container = $('chat-messages');
+  let typing = container.querySelector('.chat-typing');
+  if (!typing) {
+    typing = document.createElement('div');
+    typing.className = 'chat-typing visible';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    container.appendChild(typing);
+  } else {
+    typing.classList.add('visible');
+  }
+  container.scrollTop = container.scrollHeight;
+}
+
+function hideTypingIndicator() {
+  const typing = document.querySelector('.chat-typing');
+  if (typing) typing.classList.remove('visible');
+}
+
+async function sendMessage() {
+  const input = $('chat-input');
+  const text = input.value.trim();
+  if (!text || !chatActive) return;
+  input.value = '';
+  input.disabled = true;
+  $('chat-send-btn').disabled = true;
+
+  addMessage(text, null, 'student');
+
+  showTypingIndicator();
+
+  const langCodes = { en: 'en', de: 'de', fr: 'fr' };
+  const lang = APP.state.selectedLang;
+
+  const translated = await googleTranslate(text, 'es', lang);
+  const feedback = CHAT_FEEDBACK.positive[Math.floor(Math.random() * CHAT_FEEDBACK.positive.length)];
+
+  setTimeout(() => {
+    hideTypingIndicator();
+    if (translated && translated.toLowerCase() !== text.toLowerCase()) {
+      addMessage(`"${translated}" — ${feedback}`, null, 'teacher');
+    } else {
+      addMessage(feedback, null, 'teacher');
+    }
+
+    setTimeout(() => {
+      input.disabled = false;
+      $('chat-send-btn').disabled = false;
+      input.focus();
+
+      setTimeout(() => {
+        teacherSpeak(chatStep + 1);
+      }, 500);
+    }, 500);
+  }, 1200);
+}
+
+/* ---- Chat Event Listeners ---- */
+$('chat-btn').addEventListener('click', openChat);
+$('chat-start-btn').addEventListener('click', startConversation);
+$('chat-send-btn').addEventListener('click', sendMessage);
+$('chat-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
+$('chat-close-btn').addEventListener('click', () => $('chat-overlay').classList.remove('active'));
+$('chat-repeat-btn').addEventListener('click', () => {
+  if (chatConversation[chatStep]) {
+    const msg = chatConversation[chatStep];
+    speak(msg.teacher, { en: 'en', de: 'de', fr: 'fr' }[APP.state.selectedLang]);
+  }
+});
+$('chat-translate-btn').addEventListener('click', () => {
+  if (chatStep > 0 && chatConversation[chatStep - 1]) {
+    showToast(chatConversation[chatStep - 1].es);
+  }
+});
+$('chat-overlay').addEventListener('click', (e) => {
+  if (e.target === $('chat-overlay')) $('chat-overlay').classList.remove('active');
+});
+
 /* ---- Google Translate ---- */
 async function googleTranslate(text, from, to) {
   try {
@@ -272,13 +609,17 @@ function renderHistory() {
 
 /* ---- Teacher Avatar ---- */
 function updateTeacherAvatars() {
-  const elements = [$('teacher-avatar-sm'), $('profile-avatar')];
+  const elements = [$('teacher-avatar-sm'), $('profile-avatar'), $('chat-teacher-avatar')];
   elements.forEach(el => {
+    if (!el) return;
     if (APP.state.teacherPhoto) {
       el.innerHTML = `<img src="${APP.state.teacherPhoto}" alt="Profesor">`;
     } else {
       el.style.background = 'var(--accent-gradient)';
-      el.innerHTML = '';
+      el.innerHTML = el.id === 'chat-teacher-avatar'
+        ? '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="6" fill="currentColor" opacity="0.6"/><path d="M6 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/></svg>'
+        : '';
+      if (el.id !== 'chat-teacher-avatar') el.style.background = 'var(--accent-gradient)';
     }
   });
 }
