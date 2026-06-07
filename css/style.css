@@ -471,6 +471,12 @@ body {
   display: flex; gap: 8px; padding: 8px 12px; border-top: 1px solid var(--border);
   background: var(--bg-secondary);
 }
+.msg-es-btn {
+  display: inline-block; margin-top: 6px; padding: 4px 10px; border: none;
+  border-radius: 12px; background: rgba(102,126,234,0.15); color: var(--accent-1);
+  font-size: 12px; cursor: pointer; transition: var(--transition);
+}
+.msg-es-btn:hover { background: rgba(102,126,234,0.3); }
 .chat-footer .btn-primary { flex: 1; padding: 10px; font-size: 14px; }
 .chat-footer .btn-secondary { font-size: 12px; padding: 8px 12px; }
 

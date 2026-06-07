@@ -427,10 +427,21 @@ function teacherSpeak(step) {
 
   addMessage(text, msg.es, 'teacher');
   const langCode = { en: 'en', de: 'de', fr: 'fr', es: 'es' }[APP.state.selectedLang];
-  speak(text, langCode);
   if (msg.es && APP.state.selectedLang !== 'es') {
-    setTimeout(() => speak(msg.es, 'es'), 2000);
+    speakWithTranslation(text, langCode, msg.es, 'es');
+  } else {
+    speak(text, langCode);
   }
+}
+
+function speakWithTranslation(text, lang1, text2, lang2) {
+  if (!window.speechSynthesis) return;
+  const u1 = new SpeechSynthesisUtterance(text);
+  u1.lang = lang1; u1.rate = 0.85; u1.pitch = 1; u1.volume = 1;
+  const u2 = new SpeechSynthesisUtterance(text2);
+  u2.lang = lang2; u2.rate = 0.8; u2.pitch = 0.9; u2.volume = 1;
+  u1.onend = () => setTimeout(() => window.speechSynthesis.speak(u2), 400);
+  window.speechSynthesis.speak(u1);
 }
 
 function endConversation() {
@@ -460,6 +471,7 @@ function addMessage(text, translation, sender, correction) {
     <div class="msg-bubble">
       <div class="msg-text">${text}</div>
       ${translation ? `<div class="msg-translation">${translation}</div>` : ''}
+      ${translation && sender === 'teacher' ? `<button class="msg-es-btn" data-es="${translation.replace(/"/g, '&quot;')}">🔊 Español</button>` : ''}
       ${correctionHtml}
       <div class="msg-time">${time}</div>
     </div>
@@ -487,6 +499,39 @@ function hideTypingIndicator() {
   if (typing) typing.classList.remove('visible');
 }
 
+const TEACHER_RESPONSES = {
+  thanks: [
+    '¡De nada! Sigue practicando.',
+    '¡Por nada! Estás progresando muy bien.',
+    '¡Con gusto! Así se aprende.'
+  ],
+  help: [
+    'Claro, te explico. Presta atención a la pronunciación.',
+    'Por supuesto. Escucha con cuidado cómo se dice.',
+    'Te ayudo. Repite después de mí.'
+  ],
+  question: [
+    '¡Buena pregunta! Vamos a practicarlo.',
+    'Excelente pregunta. Así es como se dice.',
+    'Me alegra que preguntes. Presta atención.'
+  ],
+  generic: [
+    '¡Muy bien! Sigue así.',
+    'Excelente respuesta. Vas mejorando.',
+    'Perfecto. Cada día lo haces mejor.',
+    'Bien hecho. Continúa practicando.',
+    'Así se hace. Estoy orgulloso de tu progreso.'
+  ]
+};
+
+function detectIntent(text) {
+  const t = text.toLowerCase();
+  if (/gracias|thanks|thank you|merci|danke/i.test(t)) return 'thanks';
+  if (/no entiendo|no comprendo|expl[íi]came|c[óo]mo se dice|help|qu[eé] significa|no s[eé]/i.test(t)) return 'help';
+  if (/c[oó]mo|qu[eé] es|por qu[eé]|cu[áa]ndo|d[oó]nde|qui[eé]n/i.test(t)) return 'question';
+  return 'generic';
+}
+
 async function sendMessage() {
   const input = $('chat-input');
   const text = input.value.trim();
@@ -502,15 +547,16 @@ async function sendMessage() {
   const lang = APP.state.selectedLang;
 
   const translated = await googleTranslate(text, 'es', lang);
-  const feedback = CHAT_FEEDBACK.positive[Math.floor(Math.random() * CHAT_FEEDBACK.positive.length)];
+  const intent = detectIntent(text);
+  const spanishReply = TEACHER_RESPONSES[intent][Math.floor(Math.random() * TEACHER_RESPONSES[intent].length)];
 
-  setTimeout(() => {
+  setTimeout(async () => {
     hideTypingIndicator();
-    if (translated && translated.toLowerCase() !== text.toLowerCase()) {
-      addMessage(`"${translated}" — ${feedback}`, null, 'teacher');
-    } else {
-      addMessage(feedback, null, 'teacher');
+    if (translated && translated.toLowerCase() !== text.toLowerCase() && lang !== 'es') {
+      addMessage(`"${translated}"`, null, 'teacher');
     }
+    addMessage(spanishReply, null, 'teacher');
+    speak(spanishReply, 'es');
 
     setTimeout(() => {
       input.disabled = false;
@@ -519,9 +565,9 @@ async function sendMessage() {
 
       setTimeout(() => {
         teacherSpeak(chatStep + 1);
-      }, 500);
-    }, 500);
-  }, 1200);
+      }, 2000);
+    }, 1500);
+  }, 1000);
 }
 
 /* ---- Chat Event Listeners ---- */
@@ -543,6 +589,10 @@ $('chat-translate-btn').addEventListener('click', () => {
 });
 $('chat-overlay').addEventListener('click', (e) => {
   if (e.target === $('chat-overlay')) $('chat-overlay').classList.remove('active');
+});
+$('chat-messages').addEventListener('click', (e) => {
+  const btn = e.target.closest('.msg-es-btn');
+  if (btn) speak(btn.dataset.es, 'es');
 });
 
 /* ---- Google Translate ---- */
