@@ -2,12 +2,12 @@
   "name": "LinguaTutor AI — Tu profesor de idiomas",
   "short_name": "LinguaTutor",
   "description": "Aprende inglés, alemán y francés con IA. Niveles A1 a C1 con traducción al español.",
-  "start_url": "/",
+  "start_url": "/LinguaTutorAI/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0f0f1a",
   "theme_color": "#1a1a2e",
-  "scope": "/",
+  "scope": "/LinguaTutorAI/",
   "lang": "es",
   "icons": [
     { "src": "icons/icon-48.png", "sizes": "48x48", "type": "image/png" },
@@ -30,13 +30,13 @@
       "name": "Nueva lección",
       "short_name": "Lección",
       "description": "Empezar una nueva lección",
-      "url": "/?action=lesson"
+      "url": "/LinguaTutorAI/?action=lesson"
     },
     {
       "name": "Traductor",
       "short_name": "Traducir",
       "description": "Abrir el traductor",
-      "url": "/?action=translate"
+      "url": "/LinguaTutorAI/?action=translate"
     }
   ]
 }
