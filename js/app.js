@@ -83,7 +83,7 @@ document.querySelectorAll('.lang-card').forEach(card => {
     document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
     APP.state.selectedLang = lang;
-    const names = { en: 'Inglés', de: 'Alemán', fr: 'Francés' };
+    const names = { en: 'Inglés', de: 'Alemán', fr: 'Francés', es: 'Español' };
     $('welcome-msg').textContent = `Practiquemos ${names[lang]}`;
     generateLesson();
   });
@@ -121,6 +121,13 @@ const LESSON_DATA = {
     b1: ['Je crois que...', 'À mon avis...', 'Pourriez-vous répéter?', 'Je suis d\'accord avec vous', 'D\'un autre côté...', 'Tout d\'abord...', 'Pour autant que je sache...', 'Cela dépend de...', 'J\'avais l\'habitude de...', 'J\'ai hâte de...'],
     b2: ['Néanmoins...', 'En outre...', 'Je vous saurais gré de...', 'Il convient de mentionner...', 'Cela étant dit...', 'Compte tenu des circonstances...', 'En fait...', 'Je comprends votre point de vue', 'Cela soulève une question pertinente', 'Il ne fait aucun doute que...'],
     c1: ['Nonobstant ce qui précède...', 'D\'un point de vue pragmatique...', 'Cela nécessite une approche globale', 'Les implications sont considérables', 'Un changement de paradigme est évident', 'Cela mérite une étude plus approfondie', 'La corrélation est significative', 'Dans un contexte plus large...', 'Cela souligne l\'importance de...', 'L\'extrapolation suggère...']
+  },
+  es: {
+    a1: ['Hola', 'Buenos días', '¿Cómo estás?', 'Me llamo...', 'Gracias', 'Por favor', 'Sí', 'No', 'Adiós', 'Soy de...'],
+    a2: ['Me gustaría...', '¿Dónde está...?', '¿Cuánto cuesta?', '¿Puedes ayudarme?', 'No entiendo', 'Disculpa', 'Necesito...', '¿Hablas español?', '¿Qué hora es?', 'Me gusta...'],
+    b1: ['Creo que...', 'En mi opinión...', '¿Podrías repetir?', 'Estoy de acuerdo', 'Por otro lado...', 'En primer lugar...', 'Hasta donde sé...', 'Depende de...', 'Solía...', 'Tengo ganas de...'],
+    b2: ['No obstante...', 'Además...', 'Te agradecería si...', 'Cabe mencionar que...', 'Dicho esto...', 'Bajo las circunstancias...', 'De hecho...', 'Entiendo tu punto', 'Eso plantea una pregunta válida', 'No hay duda de que...'],
+    c1: ['Sin perjuicio de lo anterior...', 'Desde un punto de vista pragmático...', 'Esto requiere un enfoque integral', 'Las implicaciones son de gran alcance', 'Es evidente un cambio de paradigma', 'Esto merece una investigación más a fondo', 'La correlación es significativa', 'En un contexto más amplio...', 'Esto subraya la importancia de...', 'La extrapolación sugiere...']
   }
 };
 
@@ -145,6 +152,13 @@ const EXAMPLES = {
     b1: ['Je crois que apprendre des langues est amusant.', 'À mon avis, c\'est la meilleure option.', 'Pourriez-vous répéter plus lentement?', 'Je suis d\'accord avec votre point de vue.', 'D\'un autre côté, nous devons considérer le coût.', 'Tout d\'abord, laissez-moi me présenter.', 'Pour autant que je sache, la réunion est à 15h.', 'Cela dépend du temps.', 'J\'avais l\'habitude de vivre à Paris.', 'J\'ai hâte de faire notre voyage.'],
     b2: ['Néanmoins, les résultats étaient positifs.', 'En outre, nous devons analyser les données.', 'Je vous saurais gré de pouvoir aider.', 'Il convient de mentionner sa contribution.', 'Cela étant dit, nous devrions continuer.', 'Compte tenu des circonstances, nous comprenons.', 'En fait, je suis d\'accord.', 'Je comprends votre point de vue sur le budget.', 'Cela soulève une question pertinente.', 'Il ne fait aucun doute que la pratique aide.'],
     c1: ['Nonobstant les problèmes mentionnés, nous continuons.', 'D\'un point de vue pragmatique, c\'est viable.', 'Cela nécessite une approche stratégique globale.', 'Les implications sont considérables pour l\'industrie.', 'Un changement de paradigme est évident en linguistique moderne.', 'Cela mérite une étude plus approfondie par les chercheurs.', 'La corrélation est statistiquement significative.', 'Dans un contexte plus large, cela affecte les marchés mondiaux.', 'Cela souligne l\'importance de l\'éducation.', 'L\'extrapolation suggère une croissance continue.']
+  },
+  es: {
+    a1: ['A: ¡Hola! B: ¡Hola! ¡Qué gusto!', '¡Buenos días, profesor!', '¿Cómo estás hoy?', 'Me llamo Carlos.', '¡Muchas gracias!', 'Por favor, siéntate.', 'Sí, entiendo.', 'No, gracias.', '¡Adiós, hasta luego!', 'Soy de México.'],
+    a2: ['Me gustaría un café, por favor.', '¿Dónde está la estación de tren?', '¿Cuánto cuesta este libro?', '¿Puedes ayudarme a encontrar esto?', 'No entiendo esta palabra.', 'Disculpa, ¿dónde está el baño?', 'Necesito agua.', '¿Hablas español?', '¿A qué hora es la reunión?', 'Me gusta el helado de chocolate.'],
+    b1: ['Creo que aprender idiomas es divertido.', 'En mi opinión, esta es la mejor opción.', '¿Podrías repetir más despacio?', 'Estoy de acuerdo con tu punto de vista.', 'Por otro lado, debemos considerar el costo.', 'En primer lugar, permíteme presentarme.', 'Hasta donde sé, la reunión es a las 3pm.', 'Depende del clima.', 'Solía vivir en Madrid.', 'Tengo ganas de nuestro viaje.'],
+    b2: ['No obstante, los resultados fueron positivos.', 'Además, necesitamos analizar los datos.', 'Te agradecería si pudieras ayudar.', 'Cabe mencionar su contribución.', 'Dicho esto, deberíamos continuar.', 'Bajo las circunstancias, lo entendemos.', 'De hecho, estoy de acuerdo.', 'Entiendo tu punto sobre el presupuesto.', 'Eso plantea una pregunta válida.', 'No hay duda de que la práctica ayuda.'],
+    c1: ['Sin perjuicio de lo anterior, continuamos.', 'Desde un punto de vista pragmático, esto es viable.', 'Esto requiere un enfoque estratégico integral.', 'Las implicaciones son de gran alcance para la industria.', 'Es evidente un cambio de paradigma en la lingüística moderna.', 'Esto merece una investigación más a fondo.', 'La correlación es estadísticamente significativa.', 'En un contexto más amplio, esto afecta los mercados globales.', 'Esto subraya la importancia de la educación.', 'La extrapolación sugiere un crecimiento continuo.']
   }
 };
 
@@ -278,6 +292,49 @@ const CONVERSATIONS = {
       { teacher: "Une excellente suggestion! Cela nécessite une coopération internationale.", es: "¡Una excelente sugerencia! Esto requiere cooperación internacional." },
       { teacher: "Ce fut une conversation stimulante. J'attends notre prochaine discussion.", es: "Ha sido una conversación estimulante. Espero la próxima discusión." }
     ]
+  },
+  es: {
+    a1: [
+      { teacher: "¡Hola! ¿Cómo estás hoy?", es: "Hello! How are you today?" },
+      { teacher: "Me llamo [teacher]. ¿Cómo te llamas?", es: "My name is [teacher]. What's your name?" },
+      { teacher: "¡Mucho gusto, [student]! ¿De dónde eres?", es: "Nice to meet you, [student]! Where are you from?" },
+      { teacher: "¡Maravilloso! ¿Te gusta aprender español?", es: "Wonderful! Do you like learning Spanish?" },
+      { teacher: "¡Qué bien! ¿Qué color te gusta?", es: "That's great! What color do you like?" },
+      { teacher: "¡Excelente! Practiquemos más. ¿Puedes decir 'gracias'?", es: "Excellent! Let's practice more. Can you say 'thank you'?" },
+      { teacher: "¡Perfecto! Lo estás haciendo muy bien. ¡Hasta luego!", es: "Perfect! You're doing very well. Goodbye for now!" }
+    ],
+    a2: [
+      { teacher: "¡Buenos días! ¿Cómo puedo ayudarte hoy?", es: "Good morning! How can I help you today?" },
+      { teacher: "Me gustaría ir al supermercado. ¿Dónde está?", es: "I'd like to go to the supermarket. Where is it?" },
+      { teacher: "¡Gracias! ¿Qué necesitas comprar?", es: "Thank you! What do you need to buy?" },
+      { teacher: "¡Buenas elecciones! ¿Cuánto cuesta el pan?", es: "Good choices! How much does bread cost?" },
+      { teacher: "¡Es barato! ¿Tienes dinero?", es: "That's cheap! Do you have any money?" },
+      { teacher: "¡Perfecto! Paguemos y vayamos a casa. ¡Bien hecho!", es: "Perfect! Let's pay and go home. Well done!" }
+    ],
+    b1: [
+      { teacher: "¡Hola! ¿Qué hiciste el fin de semana pasado?", es: "Hi there! What did you do last weekend?" },
+      { teacher: "¡Suena interesante! ¿Disfrutas las actividades al aire libre?", es: "That sounds interesting! Do you enjoy outdoor activities?" },
+      { teacher: "¡Entiendo! ¿Cuál es tu pasatiempo favorito?", es: "I see! What's your favorite hobby?" },
+      { teacher: "¡Es un gran pasatiempo! ¿Cuánto tiempo llevas haciéndolo?", es: "That's a great hobby! How long have you been doing it?" },
+      { teacher: "¡Increíble! Creo que los pasatiempos son importantes para nuestro bienestar.", es: "Amazing! I think hobbies are important for our well-being." },
+      { teacher: "¡Estoy de acuerdo! Encontrémonos de nuevo y hablemos más. ¡Cuídate!", es: "I agree! Let's meet again and talk more. Take care!" }
+    ],
+    b2: [
+      { teacher: "¡Buen día! Me gustaría discutir sobre tecnología. ¿Qué piensas sobre la IA?", es: "Good day! I'd like to discuss technology. What do you think about AI?" },
+      { teacher: "¡Es una perspectiva interesante! ¿Crees que la IA reemplazará empleos?", es: "That's an interesting perspective! Do you think AI will replace jobs?" },
+      { teacher: "Entiendo tu punto. Sin embargo, la IA también crea nuevas oportunidades.", es: "I understand your point. However, AI also creates new opportunities." },
+      { teacher: "¡Exactamente! ¿Qué campo crees que se beneficiará más de la IA?", es: "Exactly! What field do you think will benefit most from AI?" },
+      { teacher: "¡Fascinante! Creo que la educación se transformará significativamente.", es: "Fascinating! I think education will transform significantly." },
+      { teacher: "¡Gran discusión! Continuemos otro día. ¡Adiós!", es: "Great discussion! Let's continue another day. Goodbye!" }
+    ],
+    c1: [
+      { teacher: "¡Saludos! Me gustaría explorar el concepto de globalización. ¿Cuál es tu opinión?", es: "Greetings! I'd like to explore the concept of globalization. What's your view?" },
+      { teacher: "¡Un argumento convincente! ¿Cómo crees que la globalización afecta las culturas locales?", es: "A compelling argument! How do you think globalization affects local cultures?" },
+      { teacher: "Esa es una perspectiva matizada. De hecho, hay aspectos tanto positivos como negativos.", es: "That's a nuanced perspective. There are indeed both positive and negative aspects." },
+      { teacher: "¡Precisamente! ¿Qué medidas podrían mitigar los efectos negativos?", es: "Precisely! What measures could mitigate the negative effects?" },
+      { teacher: "¡Una excelente sugerencia! Esto requiere cooperación internacional.", es: "An excellent suggestion! This requires international cooperation." },
+      { teacher: "Ha sido una conversación estimulante. Espero con interés nuestra próxima discusión.", es: "It's been a stimulating conversation. I look forward to our next discussion." }
+    ]
   }
 };
 
@@ -369,7 +426,11 @@ function teacherSpeak(step) {
   text = text.replace('[student]', studentName);
 
   addMessage(text, msg.es, 'teacher');
-  speak(text, { en: 'en', de: 'de', fr: 'fr' }[APP.state.selectedLang]);
+  const langCode = { en: 'en', de: 'de', fr: 'fr', es: 'es' }[APP.state.selectedLang];
+  speak(text, langCode);
+  if (msg.es && APP.state.selectedLang !== 'es') {
+    setTimeout(() => speak(msg.es, 'es'), 2000);
+  }
 }
 
 function endConversation() {
@@ -438,7 +499,6 @@ async function sendMessage() {
 
   showTypingIndicator();
 
-  const langCodes = { en: 'en', de: 'de', fr: 'fr' };
   const lang = APP.state.selectedLang;
 
   const translated = await googleTranslate(text, 'es', lang);
@@ -473,7 +533,7 @@ $('chat-close-btn').addEventListener('click', () => $('chat-overlay').classList.
 $('chat-repeat-btn').addEventListener('click', () => {
   if (chatConversation[chatStep]) {
     const msg = chatConversation[chatStep];
-    speak(msg.teacher, { en: 'en', de: 'de', fr: 'fr' }[APP.state.selectedLang]);
+    speak(msg.teacher, { en: 'en', de: 'de', fr: 'fr', es: 'es' }[APP.state.selectedLang]);
   }
 });
 $('chat-translate-btn').addEventListener('click', () => {
@@ -506,8 +566,8 @@ async function generateLesson() {
 
   const words = LESSON_DATA[lang][level];
   const examples = EXAMPLES[lang][level];
-  const langNames = { en: 'Inglés', de: 'Alemán', fr: 'Francés' };
-  const emojis = { en: '🇬🇧', de: '🇩🇪', fr: '🇫🇷' };
+  const langNames = { en: 'Inglés', de: 'Alemán', fr: 'Francés', es: 'Español' };
+  const emojis = { en: '🇬🇧', de: '🇩🇪', fr: '🇫🇷', es: '🇪🇸' };
 
   $('lesson-title').innerHTML = `${emojis[lang]} ${langNames[lang]} — Nivel ${level.toUpperCase()}`;
 
@@ -516,12 +576,18 @@ async function generateLesson() {
 
   const translations = [];
   for (let i = 0; i < words.length; i++) {
-    const translated = await googleTranslate(words[i], lang, 'es');
-    const exampleTranslated = await googleTranslate(examples[i], lang, 'es');
+    let translated, exampleTranslated;
+    if (lang === 'es') {
+      translated = words[i];
+      exampleTranslated = examples[i];
+    } else {
+      translated = await googleTranslate(words[i], lang, 'es');
+      exampleTranslated = await googleTranslate(examples[i], lang, 'es');
+    }
     translations.push({ word: words[i], translation: translated || '...', example: examples[i], exampleTrans: exampleTranslated || '...' });
   }
 
-  const langCodes = { en: 'en', de: 'de', fr: 'fr' };
+  const langCodes = { en: 'en', de: 'de', fr: 'fr', es: 'es' };
   const langCode = langCodes[lang];
 
   container.innerHTML = translations.map((t, i) => `
@@ -575,11 +641,12 @@ function updateStats() {
 }
 
 function updateProgress() {
-  const counts = { en: 0, de: 0, fr: 0 };
+  const counts = { en: 0, de: 0, fr: 0, es: 0 };
   APP.state.history.forEach(h => {
     if (h.lang === 'Inglés') counts.en += h.words;
     if (h.lang === 'Alemán') counts.de += h.words;
     if (h.lang === 'Francés') counts.fr += h.words;
+    if (h.lang === 'Español') counts.es += h.words;
   });
   Object.keys(counts).forEach(k => {
     const pct = Math.min(100, (counts[k] / 50) * 100);
@@ -841,8 +908,7 @@ function playOral(speed = 1.0) {
 function playTeacherWord() {
   const w = APP.state.oralWords[APP.state.oralIndex];
   if (!w) return;
-  const langCodes = { en: 'en', de: 'de', fr: 'fr' };
-  speak(w.word, langCodes[APP.state.selectedLang]);
+  speak(w.word, { en: 'en', de: 'de', fr: 'fr', es: 'es' }[APP.state.selectedLang]);
 }
 
 /* ---- Exam & Oral event listeners ---- */
@@ -966,7 +1032,7 @@ $('speak-btn').addEventListener('click', () => {
   const texts = document.querySelectorAll('.word-card .original');
   if (texts.length === 0) return showToast('No hay palabras para escuchar');
   texts.forEach((el, i) => {
-    setTimeout(() => speak(el.textContent, { en: 'en', de: 'de', fr: 'fr' }[APP.state.selectedLang]), i * 1500);
+    setTimeout(() => speak(el.textContent, { en: 'en', de: 'de', fr: 'fr', es: 'es' }[APP.state.selectedLang]), i * 1500);
   });
 });
 $('change-photo-btn').addEventListener('click', () => $('photo-input').click());
