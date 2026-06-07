@@ -436,10 +436,13 @@ function teacherSpeak(step) {
 
 function speakWithTranslation(text, lang1, text2, lang2) {
   if (!window.speechSynthesis) return;
+  const avatar = $('teacher-showcase-avatar');
   const u1 = new SpeechSynthesisUtterance(text);
   u1.lang = lang1; u1.rate = 0.85; u1.pitch = 1; u1.volume = 1;
+  u1.onstart = () => { if (avatar) avatar.classList.add('speaking'); };
   const u2 = new SpeechSynthesisUtterance(text2);
   u2.lang = lang2; u2.rate = 0.8; u2.pitch = 0.9; u2.volume = 1;
+  u2.onend = () => { if (avatar) avatar.classList.remove('speaking'); };
   u1.onend = () => setTimeout(() => window.speechSynthesis.speak(u2), 400);
   window.speechSynthesis.speak(u1);
 }
@@ -679,6 +682,9 @@ function speak(text, lang = 'en') {
   utterance.rate = 0.85;
   utterance.pitch = 1;
   utterance.volume = 1;
+  const avatar = $('teacher-showcase-avatar');
+  utterance.onstart = () => { if (avatar) avatar.classList.add('speaking'); };
+  utterance.onend = () => { if (avatar) avatar.classList.remove('speaking'); };
   window.speechSynthesis.speak(utterance);
 }
 
