@@ -71,6 +71,7 @@ $('teacher-form').addEventListener('submit', (e) => {
   APP.state.teacherName = name;
   $('header-teacher-name').textContent = name;
   $('profile-name').textContent = name;
+  $('teacher-showcase-name').textContent = name;
   showScreen('dashboard');
   showToast(`¡Bienvenido! Tu profesor ${name} te espera`);
 });
@@ -609,17 +610,17 @@ function renderHistory() {
 
 /* ---- Teacher Avatar ---- */
 function updateTeacherAvatars() {
-  const elements = [$('teacher-avatar-sm'), $('profile-avatar'), $('chat-teacher-avatar')];
+  const elements = [$('teacher-avatar-sm'), $('profile-avatar'), $('chat-teacher-avatar'), $('teacher-showcase-avatar')];
   elements.forEach(el => {
     if (!el) return;
     if (APP.state.teacherPhoto) {
       el.innerHTML = `<img src="${APP.state.teacherPhoto}" alt="Profesor">`;
     } else {
       el.style.background = 'var(--accent-gradient)';
-      el.innerHTML = el.id === 'chat-teacher-avatar'
+      el.innerHTML = el.id === 'chat-teacher-avatar' || el.id === 'teacher-showcase-avatar'
         ? '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="6" fill="currentColor" opacity="0.6"/><path d="M6 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/></svg>'
         : '';
-      if (el.id !== 'chat-teacher-avatar') el.style.background = 'var(--accent-gradient)';
+      if (el.id !== 'chat-teacher-avatar' && el.id !== 'teacher-showcase-avatar') el.style.background = 'var(--accent-gradient)';
     }
   });
 }
