@@ -368,6 +368,32 @@ const CHAT_FEEDBACK = {
 let chatConversation = [];
 let chatStep = 0;
 let chatActive = false;
+let aiChatMode = false;
+let aiChatHistory = [];
+let aiServerOnline = false;
+
+async function checkAIServer() {
+  try {
+    const res = await fetch('http://localhost:3000/api/status');
+    const data = await res.json();
+    aiServerOnline = data.online;
+    return data;
+  } catch { aiServerOnline = false; return { online: false }; }
+}
+
+function setAIModeIndicator() {
+  const status = $('chat-ai-status');
+  const aiBtn = $('chat-ai-btn');
+  if (aiServerOnline) {
+    aiBtn.style.display = 'inline-block';
+    aiBtn.textContent = aiChatMode ? '🤖 IA: ON' : '🤖 IA';
+    aiBtn.className = 'btn-secondary' + (aiChatMode ? ' btn-ai-on' : ' btn-ai');
+    status.innerHTML = aiChatMode ? '<span class="ai-dot on"></span> IA conectada' : '';
+  } else {
+    aiBtn.style.display = 'none';
+    status.innerHTML = '';
+  }
+}
 
 function openChat() {
   const lang = APP.state.selectedLang;
@@ -377,6 +403,8 @@ function openChat() {
   chatConversation = CONVERSATIONS[lang][level];
   chatStep = 0;
   chatActive = false;
+  aiChatMode = false;
+  aiChatHistory = [];
   $('chat-overlay').classList.add('active');
   $('chat-messages').innerHTML = '<div class="chat-welcome"><p>Presiona "Iniciar conversación" para empezar</p></div>';
   $('chat-start-btn').style.display = 'block';
@@ -385,7 +413,9 @@ function openChat() {
   $('chat-input').disabled = true;
   $('chat-send-btn').disabled = true;
   $('chat-teacher-name').textContent = APP.state.teacherName;
+  $('chat-teacher-name').textContent = APP.state.teacherName;
   updateChatAvatar();
+  checkAIServer().then(setAIModeIndicator);
 }
 
 function updateChatAvatar() {
@@ -535,6 +565,32 @@ function detectIntent(text) {
   return 'generic';
 }
 
+function toggleAIChat() {
+  if (!aiServerOnline) return showToast('Ollama no está disponible');
+  aiChatMode = !aiChatMode;
+  if (aiChatMode) {
+    aiChatHistory = [];
+    $('chat-messages').innerHTML = '<div class="chat-welcome"><p>🤖 Modo IA activado. Escribe lo que quieras, el profesor responde como humano.</p></div>';
+    $('chat-start-btn').style.display = 'none';
+    $('chat-repeat-btn').style.display = 'none';
+    $('chat-translate-btn').style.display = 'none';
+    $('chat-input').disabled = false;
+    $('chat-send-btn').disabled = false;
+    $('chat-input').focus();
+    chatActive = true;
+  } else {
+    $('chat-messages').innerHTML = '<div class="chat-welcome"><p>Presiona "Iniciar conversación" para empezar</p></div>';
+    $('chat-start-btn').style.display = 'block';
+    $('chat-repeat-btn').style.display = 'none';
+    $('chat-translate-btn').style.display = 'none';
+    $('chat-input').disabled = true;
+    $('chat-send-btn').disabled = true;
+    aiChatHistory = [];
+    chatActive = false;
+  }
+  setAIModeIndicator();
+}
+
 async function sendMessage() {
   const input = $('chat-input');
   const text = input.value.trim();
@@ -544,8 +600,41 @@ async function sendMessage() {
   $('chat-send-btn').disabled = true;
 
   addMessage(text, null, 'student');
-
   showTypingIndicator();
+
+  if (aiChatMode) {
+    aiChatHistory.push({ role: 'user', content: text });
+    try {
+      const res = await fetch('http://localhost:3000/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          history: aiChatHistory.slice(-10),
+          lang: APP.state.selectedLang,
+          level: APP.state.selectedLevel,
+          teacherName: APP.state.teacherName
+        })
+      });
+      const data = await res.json();
+      hideTypingIndicator();
+      if (data.reply) {
+        addMessage(data.reply, null, 'teacher');
+        aiChatHistory.push({ role: 'assistant', content: data.reply });
+        const lines = data.reply.split('\n').filter(l => l.trim());
+        const speakText = lines[0] || data.reply;
+        const langCode = { en: 'en', de: 'de', fr: 'fr', es: 'es' }[APP.state.selectedLang];
+        speak(speakText, langCode);
+      }
+    } catch {
+      hideTypingIndicator();
+      addMessage('⚠️ Error conectando con Ollama. ¿Está corriendo el servidor local?', null, 'teacher');
+    }
+    input.disabled = false;
+    $('chat-send-btn').disabled = false;
+    input.focus();
+    return;
+  }
 
   const lang = APP.state.selectedLang;
 
@@ -579,6 +668,7 @@ $('chat-start-btn').addEventListener('click', startConversation);
 $('chat-send-btn').addEventListener('click', sendMessage);
 $('chat-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
 $('chat-close-btn').addEventListener('click', () => $('chat-overlay').classList.remove('active'));
+$('chat-ai-btn').addEventListener('click', toggleAIChat);
 $('chat-repeat-btn').addEventListener('click', () => {
   if (chatConversation[chatStep]) {
     const msg = chatConversation[chatStep];

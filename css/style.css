@@ -507,6 +507,12 @@ body {
 .msg-es-btn:hover { background: rgba(102,126,234,0.3); }
 .chat-footer .btn-primary { flex: 1; padding: 10px; font-size: 14px; }
 .chat-footer .btn-secondary { font-size: 12px; padding: 8px 12px; }
+.btn-ai { border-color: rgba(74,222,128,0.4); color: var(--success); }
+.btn-ai:hover { border-color: var(--success); }
+.btn-ai-on { border-color: var(--success); color: white; background: rgba(74,222,128,0.2); }
+.chat-ai-status { text-align: center; padding: 4px 0 2px; font-size: 11px; color: var(--text-muted); }
+.ai-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; }
+.ai-dot.on { background: var(--success); animation: pulse 1.5s infinite; }
 
 /* Button accent */
 .btn-accent {
